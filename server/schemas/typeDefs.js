@@ -7,7 +7,7 @@ const typeDefs = gql`
     lastName: String
     fullName: String
     sayGreetings: String
-    userTodos: [Todo]
+    userGoals: [Goal]
   }
   type Goal {
     _id: ID!

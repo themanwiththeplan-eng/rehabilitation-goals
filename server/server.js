@@ -54,7 +54,7 @@ const startServer = async () => {
 
 startServer()
   .then(() => {
-    console.log('hello')
+    console.log('Hi There')
   })
   .catch((e) => {
     console.log(e)

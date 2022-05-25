@@ -1,5 +1,5 @@
 //to decode JWT token
-const secret = 'dsaiuhdsay0odgad07asged680ydbsayudgb07812g341gdasoyudas'
+const secret = 'it is secret shhhhh'
 
 // expiration for JWT
 const expiration = '2h'
