@@ -88,6 +88,35 @@ const resolvers = {
         throw new Error(e)
       }
     },
+    updateGoal: async (root, {_id, text, timeChanged}, context) =>{
+      if (!context.user){
+        throw new AuthenticationError('User not signed in')
+      }
+      
+        const foundGoal = await Goal.findOne({ _id })
+
+        if (foundGoal){
+          try{
+            Goal.updateOne({text, timeChanged})
+          }
+          catch(e){
+            throw new Error(e)
+          }
+        }
+      },
+    removeGoal: async(root, {_id}, context) => {
+      if (!context.user){
+        throw new AuthenticationError('User not signed in')
+      }
+
+      try{
+        Goal.findOneAndDelete({
+          _id
+        })
+      }catch(e){
+        throw new Error(e)
+      }
+    }
   },
   User: {
     fullName: (root) => {
