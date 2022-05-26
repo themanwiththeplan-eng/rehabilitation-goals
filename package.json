@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/core": "^4.12.4",
     "apollo-client": "^2.6.10",
     "express-async-handler": "^1.2.0",
     "graphql": "^15.8.0"
