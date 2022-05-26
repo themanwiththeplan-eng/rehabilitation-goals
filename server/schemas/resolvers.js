@@ -7,21 +7,21 @@ const { Goal, User } = require('../db')
 
 const resolvers = {
   Query: {
-    goals: async () => {
+    getGoals: async () => {
       try {
         return await Goal.find({})
       } catch (e) {
         throw new Error(e)
       }
     },
-    users: async (root, args) => {
+    getUsers: async (root, args) => {
       try {
         return await User.find({})
       } catch (e) {
         throw new Error(e)
       }
     },
-    user: async (root, { id }) => {
+    getUser: async (root, { id }) => {
       try {
         return await User.findById(id)
       } catch (e) {

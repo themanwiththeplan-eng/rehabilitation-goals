@@ -2,11 +2,20 @@ const path = require('path')
 const express = require('express')
 const db = require('./config/connection')
 const { ApolloServer } = require('apollo-server-express')
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
+
 const { typeDefs, resolvers } = require('./schemas')
-const { authMiddleware } = require('./utils/auth')
+// const { authMiddleware } = require('./utils/auth')
 
 const PORT = process.env.PORT || 3001
+
+mongoose.connect('mongodb://localhost/graphqlGoals').then(() => {
+  console.log('Successfully connecte to database')
+})
+
 const app = express()
+
 
 const server = new ApolloServer({
   typeDefs,
@@ -21,7 +30,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 
-app.use('api/goals', require('./routes/goalRoutes'))
+// app.use('api/goals', require('./routes/goalRoutes'))
 
 // if we're in production, serve client/build as static assets
 if (process.env.NODE_ENV === 'production') {

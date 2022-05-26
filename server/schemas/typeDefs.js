@@ -23,10 +23,10 @@ const typeDefs = gql`
   }
 
   type Query {
-    users: [User]
-    user(id: String!): User
-    goals: [Goal]
-    goal: Goal
+    getUsers: [User]
+    getUser(id: String!): User
+    getGoals: [Goal]
+    getGoal: Goal
   }
   type Mutation {
     login(firstName: String!, password: String!): Auth
