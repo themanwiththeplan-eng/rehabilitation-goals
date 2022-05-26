@@ -1,3 +1,4 @@
+// are we deleting this?
 const mongoose = require('mongoose');
 
 mongoose.connect(`mongodb+srv://laurenshallop:password@cluster0.tpz22.mongodb.net/rehabgoals?retryWrites=true&w=majority`, {
