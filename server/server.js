@@ -3,13 +3,14 @@ const express = require('express')
 const mongoose = require('mongoose')
 const { ApolloServer } = require('apollo-server-express')
 const jwt = require('jsonwebtoken')
+require('dotenv').config()
 
 const { typeDefs, resolvers } = require('./schemas')
 const { secret } = require('./common/vars')
 
 const PORT = process.env.PORT || 3001
 mongoose.connect('mongodb://localhost/graphqlGoals').then(() => {
-  console.log('successfully connected db')
+  console.log('Successfully connecte to database')
 })
 
 const apolloServer = new ApolloServer({
