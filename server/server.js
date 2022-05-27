@@ -4,7 +4,7 @@ const db = require('./config/connection')
 const { ApolloServer } = require('apollo-server-express')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
-
+const mongoose = require('mongoose')
 const { typeDefs, resolvers } = require('./schemas')
 // const { authMiddleware } = require('./utils/auth')
 
