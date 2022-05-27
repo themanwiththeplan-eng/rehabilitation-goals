@@ -1,3 +1,4 @@
+// are we deleting this?
 const mongoose = require('mongoose')
 
 const goalSchema = mongoose.schema(
