@@ -38,8 +38,12 @@ function App() {
           <Navbar />
           <Switch>
             <Route exact path="/" component={ loginForm } />
+
+            {/* <Route exact path="/saved" component={  } /> */}
+
             <Route exact path="" component={  } />
             <Route exact path="/findGoal/:id" component={ findGoal }/>
+
             <Route render={() => <h1 className="display-2">Wrong page!</h1>} />
           </Switch>
         </>
