@@ -22,6 +22,7 @@ export default function LoginPage () {
                         label="email" 
                         fullWidth 
                         autoComplete="email" 
+
                         autoFoucs />
                         {/* {...register("email", {required: "Required" })} */}
                 </Box>
