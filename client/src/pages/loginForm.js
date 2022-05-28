@@ -21,7 +21,7 @@ export default function LoginPage () {
                         label="email" 
                         fullWidth 
                         autoComplete="email" 
-                        autoFoucs />
+                        autoFocus />
                         {...register("email", {required: "Required" })}
                 </Box>
                 <Box mb={2}>
