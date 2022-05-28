@@ -1,3 +1,4 @@
+import './index.css';
 import React from 'react';
 import TextField  from '@material-ui/core/TextField';
 import Container  from '@material-ui/core/Container';
@@ -7,7 +8,7 @@ import { useForm } from "react-hook-form";
 
 export default function LoginPage () {
     const { 
-        register,
+        // register,
         handleSubmit,
     } = useForm();
     const onSubmit =(data) => console.log(data)
@@ -21,15 +22,16 @@ export default function LoginPage () {
                         label="email" 
                         fullWidth 
                         autoComplete="email" 
-                        autoFocus />
-                        {...register("email", {required: "Required" })}
+
+                        autoFoucs />
+                        {/* {...register("email", {required: "Required" })} */}
                 </Box>
                 <Box mb={2}>
                     <TextField 
                         variant="outlined"
                         label="password" 
                         fullWidth />
-                        {...register("password", {required: "Required" })}
+                        {/* {...register("password", {required: "Required" })} */}
                 </Box>
                 <Button type="submit" variant="contained" color="primary" fullWidth>
                     Login In
