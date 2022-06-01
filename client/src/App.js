@@ -10,7 +10,6 @@ import loginForm from './pages/loginForm';
 import {
   ApolloClient,
   InMemoryCache,
-  ApolloProvider,
   createHttpLink,
 } from '@apollo/client'
 import findGoal from './pages/findGoal';
@@ -68,6 +67,7 @@ function App() {
       </Router>
     </ApolloProvider>
   );
-}
+  
+
 
 export default App;
