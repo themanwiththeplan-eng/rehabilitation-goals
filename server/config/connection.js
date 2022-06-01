@@ -4,4 +4,4 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/rehabgoal
     useUnifiedTopology: true,
   }
 )
-module.exports = mongoose.connection;
+module.exports = mongoose.connection
