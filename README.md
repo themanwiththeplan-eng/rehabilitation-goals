@@ -13,4 +13,3 @@ Heroku-deployed app: Coming Soon
 GitHub repository: https://github.com/themanwiththeplan-eng/rehabilitation-goals
 
 - - - -
-
