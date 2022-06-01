@@ -1,11 +1,14 @@
 import React from 'react';
+import Header from "../src/components/Header"
+import Footer from "../src/components/Footer"
 import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Routes,
   // Link
 } from "react-router-dom";
-import { ApolloProvider } from "@apollo/react-hooks";
+// import { ApolloProvider } from "@apollo/react-hooks";
 import loginForm from './pages/loginForm';
 import {
   ApolloClient,
@@ -14,6 +17,8 @@ import {
   createHttpLink,
 } from '@apollo/client'
 import findGoal from './pages/findGoal';
+// import Home from '../pages/Home';
+import {setContext} from '@apollo/client/link/context'
 
 
 
@@ -45,14 +50,15 @@ function App() {
         {/* <> */}
           <Header />
           {/* <Switch> */}
+          <Routes>
             <div className="container">
-              <Routes>
+              
               <Route 
-               path="/" 
-               component={ <loginForm />}
+                exact path="/" 
+               element={ <loginForm />}
               />
 
-              </Routes>
+              
             </div>
             {/* <Route exact path="/" component={ loginForm } />
 
@@ -61,8 +67,9 @@ function App() {
             {/* <Route exact path="" component={  } /> */}
             <Route exact path="/findGoal/:id" component={ findGoal }/>
 
-            <Route render={() => <h1 className="display-2">Wrong page!</h1>} /> */} 
+            <Route render={() => <h1 className="display-2">Wrong page!</h1>} /> */
           {/* </Switch> */}
+          </Routes>
         <Footer />
         </div>
       </Router>
