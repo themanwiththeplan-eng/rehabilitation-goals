@@ -1,146 +1,67 @@
+const { User, Goal } = require('../models')
 const { AuthenticationError } = require('apollo-server-express')
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const { secret, expiration } = require('../common/vars')
-
-const { Goal, User } = require('../models')
+const { signToken } = require('../utils/auth')
 
 const resolvers = {
   Query: {
-    getGoals: async () => {
-      try {
-        return await Goal.find({})
-      } catch (e) {
-        throw new Error(e)
-      }
+    getGoals: async (parent, { username }) => {
+      const params = username ? { username } : {}
+      return Goal.find(params).sort({ createdAt: -1 })
     },
-    getUsers: async (root, args) => {
-      try {
-        return await User.find({})
-      } catch (e) {
-        throw new Error(e)
-      }
+    getGoal: async (parent, { _id }) => {
+      return Goal.findOne({ _id })
     },
-    getUser: async (root, { id }) => {
-      try {
-        return await User.findById(id)
-      } catch (e) {
-        throw new Error(e)
-      }
+    getUsers: async () => {
+      return User.find().select('-__v -password').populate('goals')
+    },
+    getUser: async (parent, { username }) => {
+      return User.findOne({ username })
+        .select('-__v -password')
+        .populate('goals')
     },
   },
-
   Mutation: {
-    createGoal: async (root, { text, completed }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError(
-          'Patient must be logged in to create a goal'
-        )
+    createUser: async (parent, args) => {
+      const user = await User.create(args)
+      const token = signToken(user)
+
+      return { token, user }
+    },
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email })
+
+      if (!user) {
+        throw new AuthenticationError('Incorrect credentials!')
       }
-      try {
-        // { text: 'some stuff', completed: true  }
-        return await Goal.create({
-          text,
-          completed,
-          userId: context.user._id,
+
+      const correctPw = await user.isCorrectPassword(password)
+
+      if (!correctPw) {
+        throw new AuthenticationError('Incorrect credentials!')
+      }
+
+      const token = signToken(user)
+      return { token, user }
+    },
+    createGoal: async (parent, args, context) => {
+      if (context.user) {
+        const goal = await Goal.create({
+          ...args,
+          username: context.user.username,
         })
-      } catch (e) {
-        throw new Error(e)
-      }
-    },
-    createUser: async (root, { firstName, lastName, password }) => {
-      try {
-        return await User.create({ firstName, lastName, password })
-      } catch (e) {
-        throw new Error(e)
-      }
-    },
-    login: async (root, { firstName, password }, context) => {
-      try {
-        const foundUser = await User.findOne({ firstName })
 
-        if (!foundUser) {
-          throw new AuthenticationError('No user found with this first name')
-        }
-
-        const isCorrectPassword = await bcrypt.compare(
-          password,
-          foundUser.password
+        await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { goals: goal._id } },
+          { new: true }
         )
 
-        if (!isCorrectPassword) {
-          throw new AuthenticationError('Incorrect password')
-        }
-
-        // what data do we want to put in the token
-        //
-        const token = jwt.sign(
-          { _id: foundUser._id, firstName: foundUser.firstName },
-          secret,
-          { expiresIn: expiration }
-        )
-
-        return {
-          token,
-          user: foundUser,
-        }
-      } catch (e) {
-        throw new Error(e)
-      }
-    },
-    updateGoal: async (root, { _id, text, timeChanged }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError('User not signed in')
+        return goal
       }
 
-      const foundGoal = await Goal.findOne({ _id })
-
-      if (foundGoal) {
-        try {
-          Goal.updateOne({ text, timeChanged })
-        } catch (e) {
-          throw new Error(e)
-        }
-      }
-    },
-    removeGoal: async (root, { _id }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError('User not signed in')
-      }
-
-      try {
-        Goal.findOneAndDelete({
-          _id,
-        })
-      } catch (e) {
-        throw new Error(e)
-      }
-    },
-  },
-  User: {
-    fullName: (root) => {
-      return `${root.firstName} ${root.lastName}`
-    },
-    sayGreetings: (root) => {
-      return `Hi my name is ${root.firstName}`
-    },
-    userGoals: async (root) => {
-      try {
-        return await Goal.find({ userId: root._id })
-      } catch (e) {
-        console.log('97')
-        throw new Error(e)
-      }
-    },
-  },
-  Goal: {
-    user: async (root) => {
-      try {
-        return await User.findById(root.userId)
-      } catch (e) {
-        throw new Error(e)
-      }
+      throw new AuthenticationError('You need to be logged in!')
     },
   },
 }
+
 module.exports = resolvers
