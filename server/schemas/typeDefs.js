@@ -33,7 +33,7 @@ const typeDefs = gql`
     createUser(username: String!, email: String!, password: String!): Auth
     createGoal(text: String!, completed: Boolean!): Goal
     removeGoal(_id: ID!): Goal
-    addGoal(goalAuthor: User!, goalString: String!): Goal
+    addGoal(goalAuthor: String!, goalString: String!): Goal
 
     updateGoal(
       _id: ID!
