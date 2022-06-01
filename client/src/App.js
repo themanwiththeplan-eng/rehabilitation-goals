@@ -58,11 +58,7 @@ function App() {
 
             {/* <Route exact path="/saved" component={  } /> */}
 
-<<<<<<< HEAD
-            {/* <Route exact path="" component={  } />
-=======
             {/* <Route exact path="" component={  } /> */}
->>>>>>> 28cfc486a2c83440da514880c669ce9750568f12
             <Route exact path="/findGoal/:id" component={ findGoal }/>
 
             <Route render={() => <h1 className="display-2">Wrong page!</h1>} /> */} 
