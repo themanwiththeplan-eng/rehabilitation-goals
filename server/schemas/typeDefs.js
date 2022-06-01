@@ -9,13 +9,10 @@ const typeDefs = gql`
   }
   type Goal {
     _id: ID!
-    text: String
+    GoalText: String
     completed: Boolean
     createdAt: String
-    timeCompleted: String
-    timeChanged: String
-    userId: String
-    user: User
+    username: String
   }
   type Auth {
     user: User
@@ -23,17 +20,17 @@ const typeDefs = gql`
   }
 
   type Query {
-    getUsers: [User]
-    getUser(id: String!): User
-    getGoals: [Goal]
-    getGoal: Goal
+    users: [User]
+    user(username: String!): User
+    goals(username: String): [Goal]
+    goal(_id: ID!): Goal
   }
   type Mutation {
     login(email: String!, password: String!): Auth
     createUser(username: String!, email: String!, password: String!): Auth
-    createGoal(text: String!, completed: Boolean!): Goal
+    createGoal(GoalText: String!, completed: Boolean!): Goal
     removeGoal(_id: ID!): Goal
-    addGoal(goalAuthor: String!, goalString: String!): Goal
+    # addGoal(goalAuthor: String!, goalString: String!): Goal
 
     updateGoal(
       _id: ID!

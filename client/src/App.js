@@ -1,17 +1,25 @@
-import React from 'react';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from 'react'
+import ApolloClient from 'apollo-boost'
+import { ApolloProvider } from '@apollo/react-hooks'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
-import Home from './pages/Home';
-import findGoal from "./pages/findGoal"
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Home from './pages/Home'
+import FindGoal from './pages/findGoal'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
 const client = new ApolloClient({
-  uri: '/graphql',
-  cache: new InMemoryCache(),
-});
+  request: (operation) => {
+    const token = localStorage.getItem('id_token')
 
+    operation.setContext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : '',
+      },
+    })
+  },
+  uri: '/graphql',
+})
 function App() {
   return (
     <ApolloProvider client={client}>
@@ -20,22 +28,16 @@ function App() {
           <Header />
           <div className="container">
             <Routes>
-              <Route 
-                path="/" 
-                element={<Home />}
-              />
+              <Route path="/Home" element={<Home />} />
               {/* Create a route to display a single thought's comments based on its `thoughtId` provided in the URL */}
-              <Route 
-                path="/goals/:goalId" 
-                element={<findGoal />}
-              />
+              <Route path="/goals/:goalId" element={<FindGoal />} />
             </Routes>
           </div>
           <Footer />
         </div>
       </Router>
     </ApolloProvider>
-  );
+  )
 }
 
-export default App;
+export default App

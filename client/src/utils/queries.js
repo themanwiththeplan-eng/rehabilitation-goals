@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_GOALS = gql`
-  query getGoals {
+  query goals {
     goals {
       _id
       goalString
