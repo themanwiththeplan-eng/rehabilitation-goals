@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { secret, expiration } = require('../common/vars')
 
-const { Goal, User } = require('../db')
+const { Goal, User } = require('../models')
 
 const resolvers = {
   Query: {
@@ -88,35 +88,34 @@ const resolvers = {
         throw new Error(e)
       }
     },
-    updateGoal: async (root, {_id, text, timeChanged}, context) =>{
-      if (!context.user){
+    updateGoal: async (root, { _id, text, timeChanged }, context) => {
+      if (!context.user) {
         throw new AuthenticationError('User not signed in')
       }
-      
-        const foundGoal = await Goal.findOne({ _id })
 
-        if (foundGoal){
-          try{
-            Goal.updateOne({text, timeChanged})
-          }
-          catch(e){
-            throw new Error(e)
-          }
+      const foundGoal = await Goal.findOne({ _id })
+
+      if (foundGoal) {
+        try {
+          Goal.updateOne({ text, timeChanged })
+        } catch (e) {
+          throw new Error(e)
         }
-      },
-    removeGoal: async(root, {_id}, context) => {
-      if (!context.user){
+      }
+    },
+    removeGoal: async (root, { _id }, context) => {
+      if (!context.user) {
         throw new AuthenticationError('User not signed in')
       }
 
-      try{
+      try {
         Goal.findOneAndDelete({
-          _id
+          _id,
         })
-      }catch(e){
+      } catch (e) {
         throw new Error(e)
       }
-    }
+    },
   },
   User: {
     fullName: (root) => {
