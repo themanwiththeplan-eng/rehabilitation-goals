@@ -4,17 +4,17 @@ const { signToken } = require('../utils/auth')
 
 const resolvers = {
   Query: {
-    getGoals: async (parent, { username }) => {
+    goals: async (parent, { username }) => {
       const params = username ? { username } : {}
       return Goal.find(params).sort({ createdAt: -1 })
     },
-    getGoal: async (parent, { _id }) => {
+    goal: async (parent, { _id }) => {
       return Goal.findOne({ _id })
     },
-    getUsers: async () => {
+    users: async () => {
       return User.find().select('-__v -password').populate('goals')
     },
-    getUser: async (parent, { username }) => {
+    user: async (parent, { username }) => {
       return User.findOne({ username })
         .select('-__v -password')
         .populate('goals')
