@@ -36,7 +36,7 @@ const typeDefs = gql`
     removeGoal(_id: ID!): Goal
     updateGoal(_id: ID!, text: String!, timeChanged: String, completed: Boolean!): Goal
     createUser(firstName: String!, lastName: String!, password: String!): User
-    
+    addGoal(goalAuthor: User!, goalString: String!): Goal
 
   }
 `

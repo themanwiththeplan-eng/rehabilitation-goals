@@ -1,39 +1,48 @@
 import React from 'react';
-import TextField  from '@material-ui/core/TextField';
-import Container  from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Box';
-import { useForm } from "react-hook-form";
 
-export default function findGoal(){
-    const{
-        handleSubmit,
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    } = useForm(
-        {
-            mode: 'onSubmit',
-        }
-    );
+// Import the `useParams()` hook from React Router
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
 
-    const onSubmit = (data) => console.log(data)
+import { QUERY_SINGLE_GOAL } from '../utils/queries';
 
-    return(
-        <Container maxWidth = "xs">
-            <h1>Search for a Goal</h1>
-            <form onSubmit = {handleSubmit(onSubmit)}>
-                <Box mb = {2}>
-                    <TextField
-                        variant = "standard"
-                        label = "searchBox"
-                        fullWidth
-                        autoFocus />
-                </Box>
-                <Button type = "submit" variant = "contained" color = "primary" fullWidth>
-                    Search for a Goal ID
-                </Button>
-            </form>
-        </Container>
-    );
+const SingleGoal = () => {
+  // Use `useParams()` to retrieve value of the route parameter `:profileId`
+  const { goalId } = useParams();
 
+  const { loading, data } = useQuery(QUERY_SINGLE_GOAL, {
+    // Pass the `thoughtId` URL parameter into query to retrieve this thought's data
+    variables: { goalId: goalId },
+  });
 
-}
+  const goal = data?.goal || {};
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  return (
+    <div className="my-3">
+      <h3 className="card-header bg-dark text-light p-2 m-0">
+        {goal.user} <br />
+        <span style={{ fontSize: '1rem' }}>
+          had this thought on {goal.createdAt}
+        </span>
+      </h3>
+      <div className="bg-light py-4">
+        <blockquote
+          className="p-4"
+          style={{
+            fontSize: '1.5rem',
+            fontStyle: 'italic',
+            border: '2px dotted #1a1a1a',
+            lineHeight: '1.5',
+          }}
+        >
+          {goal.text}
+        </blockquote>
+      </div>
+    </div>
+  );
+};
+
+export default SingleGoal;
