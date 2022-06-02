@@ -1,7 +1,4 @@
-const Goal = require('./Goal')
 const User = require('./User')
+const Goal = require('./Goal')
 
-module.exports = {
-  Goal,
-  User,
-}
+module.exports = { User, Goal }

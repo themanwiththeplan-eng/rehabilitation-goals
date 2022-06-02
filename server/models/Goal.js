@@ -26,10 +26,6 @@ const goalSchema = new Schema(
   }
 )
 
-goalSchema.virtual('reactionCount').get(function () {
-  return this.reactions.length
-})
-
 const Goal = model('Goal', goalSchema)
 
 module.exports = Goal

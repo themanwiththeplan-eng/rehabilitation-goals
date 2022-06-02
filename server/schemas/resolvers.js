@@ -19,9 +19,19 @@ const resolvers = {
         .select('-__v -password')
         .populate('goals')
     },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        const userData = await User.findOne({ _id: context.user._id })
+          .select('-__v -password')
+          .populate('thoughts')
+
+        return userData
+      }
+      throw new AuthenticationError('Not logged in!')
+    },
   },
   Mutation: {
-    createUser: async (parent, args) => {
+    addUser: async (parent, args) => {
       const user = await User.create(args)
       const token = signToken(user)
 
@@ -43,7 +53,7 @@ const resolvers = {
       const token = signToken(user)
       return { token, user }
     },
-    createGoal: async (parent, args, context) => {
+    addGoal: async (parent, args, context) => {
       if (context.user) {
         const goal = await Goal.create({
           ...args,
