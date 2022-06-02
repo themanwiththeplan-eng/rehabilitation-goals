@@ -1,15 +1,35 @@
-import { gql } from '@apollo/client'
+import gql from 'graphql-tag'
 
-export const ADD_GOAL = gql`
-  mutation createGoal($goalString: String!, $goalAuthor: String!) {
-    addGoal(goalString: $goalString, goalAuthor: $goalAuthor) {
-      _id
-      goalString
-      goalAuthor
-      createdAt
+export const LOGIN_USER = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
       user {
+        _id
         username
       }
+    }
+  }
+`
+
+export const ADD_USER = gql`
+  mutation addUser($username: String!, $email: String!, $password: String!) {
+    addUser(username: $username, email: $email, password: $password) {
+      token
+      user {
+        _id
+        username
+      }
+    }
+  }
+`
+export const ADD_GOAL = gql`
+  mutation addGoal($goalText: String!) {
+    addGoal(goalText: $goalText) {
+      _id
+      goalText
+      createdAt
+      username
     }
   }
 `
