@@ -6,11 +6,6 @@ import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 import { useForm } from 'react-hook-form'
 
-
-
-
-
-
 export default function LoginPage() {
   const {
     // register,
