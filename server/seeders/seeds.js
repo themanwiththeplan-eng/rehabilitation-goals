@@ -37,4 +37,7 @@ db.once('open', async () => {
 
     createdGoals.push(createdGoal)
   }
+
+  console.log('all done')
+  process.exit(0)
 })
