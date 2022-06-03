@@ -18,6 +18,19 @@ Application includes user authentication using JWT.
 Rehabilitation Goals is deployed on Heroku and repository is on GitHub. See the links below.
 
 - - - -
+Dashboard
+<img width="1440" alt="dashboard" src="https://user-images.githubusercontent.com/73785514/171916328-8e2ddb9b-baff-48a9-8fae-30f2df53d8d3.png">
+- - - -
+Login Page
+<img width="1440" alt="login" src="https://user-images.githubusercontent.com/73785514/171916369-20afadc9-a872-4fc9-bea1-04032a8e571e.png">
+- - - -
+Register page
+<img width="1440" alt="register" src="https://user-images.githubusercontent.com/73785514/171916406-6367883b-8dba-40c1-a194-8d861e5dec61.png">
+- - - -
+Home Page
+<img width="1440" alt="home" src="https://user-images.githubusercontent.com/73785514/171916434-3c71da7d-1bb8-466a-897b-13c42bcfb800.png">
+
+- - - -
 Heroku-deployed app: Coming Soon
 
 GitHub repository: https://github.com/themanwiththeplan-eng/rehabilitation-goals
