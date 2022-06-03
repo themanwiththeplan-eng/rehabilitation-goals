@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose')
-const bcrypt = require('bcryptjs')
+// const bcrypt = require('bcryptjs')
 //if we use mac to deploy our app
-// const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt')
 
 const userSchema = new Schema(
   {
