@@ -1,40 +1,43 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-import TextField from "@mui/material/TextField";
-import { outlinedInputClasses } from "@mui/material/OutlinedInput";
-import { inputLabelClasses } from "@mui/material/InputLabel";
-import { styled } from "@mui/material/styles";
+import TextField from '@mui/material/TextField'
+import { outlinedInputClasses } from '@mui/material/OutlinedInput'
+import { inputLabelClasses } from '@mui/material/InputLabel'
+import { styled } from '@mui/material/styles'
 
 const StyledTextField = styled(TextField)({
   [`& .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
-    borderColor: "green"
+    borderColor: 'green',
   },
-  [`&:hover .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
-    borderColor: "red"
-  },
-  [`& .${outlinedInputClasses.root}.${outlinedInputClasses.focused} .${outlinedInputClasses.notchedOutline}`]: {
-    borderColor: "purple"
-  },
+  [`&:hover .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]:
+    {
+      borderColor: 'red',
+    },
+  [`& .${outlinedInputClasses.root}.${outlinedInputClasses.focused} .${outlinedInputClasses.notchedOutline}`]:
+    {
+      borderColor: 'purple',
+    },
   [`& .${outlinedInputClasses.input}`]: {
-    color: "green"
+    color: 'green',
   },
   [`&:hover .${outlinedInputClasses.input}`]: {
-    color: "red"
+    color: 'red',
   },
-  [`& .${outlinedInputClasses.root}.${outlinedInputClasses.focused} .${outlinedInputClasses.input}`]: {
-    color: "purple"
-  },
+  [`& .${outlinedInputClasses.root}.${outlinedInputClasses.focused} .${outlinedInputClasses.input}`]:
+    {
+      color: 'purple',
+    },
   [`& .${inputLabelClasses.outlined}`]: {
-    color: "green"
+    color: 'green',
   },
   [`&:hover .${inputLabelClasses.outlined}`]: {
-    color: "red"
+    color: 'red',
   },
   [`& .${inputLabelClasses.outlined}.${inputLabelClasses.focused}`]: {
-    color: "purple"
-  }
-});
+    color: 'purple',
+  },
+})
 
 function App() {
   return (
@@ -47,8 +50,8 @@ function App() {
         rows={6}
       />
     </div>
-  );
+  )
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+const rootElement = document.getElementById('root')
+ReactDOM.render(<App />, rootElement)
