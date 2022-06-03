@@ -5,11 +5,11 @@ const typeDefs = gql`
     _id: ID!
     username: String
     email: String
-    goals: String
+    goals: [Goal]
   }
   type Goal {
     _id: ID!
-    GoalText: String
+    goalText: String
     completed: Boolean
     createdAt: String
     username: String
@@ -29,9 +29,9 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    addGoal(GoalText: String!, completed: Boolean!): Goal
+    # addGoal(goalText: String!, completed: Boolean!): Goal
     removeGoal(_id: ID!): Goal
-    # addGoal(goalAuthor: String!, goalString: String!): Goal
+    addGoal(goalText: String!, username: String!): Goal
 
     updateGoal(
       _id: ID!
