@@ -1,21 +1,18 @@
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const Footer = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
+  const location = useLocation()
+  const navigate = useNavigate()
   return (
-    <footer className="w-100 mt-auto bg-secondary p-4">
-      <div className="container text-center mb-5">
+    <footer className="w-100 mt-auto bg-secondary ">
+      <div className="container text-center mb-auto">
         {location.pathname !== '/' && (
-          <button
-            className="btn btn-dark mb-3"
-            onClick={() => navigate(-1)}
-          >
+          <button className=" btn-dark mb-auto" onClick={() => navigate(-1)}>
             &larr; Go Back
           </button>
         )}
-        <h4>
+        <h6>
           Made with{' '}
           <span
             className="emoji"
@@ -26,10 +23,10 @@ const Footer = () => {
             ❤️
           </span>{' '}
           by the Rehab Goals Team.
-        </h4>
+        </h6>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

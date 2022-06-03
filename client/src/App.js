@@ -4,6 +4,8 @@ import { ApolloProvider } from '@apollo/react-hooks'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 import Home from './pages/Home'
+import LoginPage from './pages/loginForm'
+import Signup from './pages/Signup'
 import FindGoal from './pages/findGoal'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -28,7 +30,10 @@ function App() {
           <Header />
           <div className="container">
             <Routes>
-              <Route path="/Home" element={<Home />} />
+              <Route path="/ " element={<Home />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<Signup />} />
+
               {/* Create a route to display a single thought's comments based on its `thoughtId` provided in the URL */}
               <Route path="/goals/:goalId" element={<FindGoal />} />
             </Routes>
