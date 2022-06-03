@@ -16,19 +16,19 @@ const GoalList = ({ goals, title }) => {
             <h4 className="card-header bg-primary text-light p-2 m-0">
               {goal.username} <br />
               <span style={{ fontSize: '1rem' }}>
-                had this thought on {goal.createdAt}
+                had this goal on {goal.createdAt}
               </span>
             </h4>
             <div className="card-body bg-light p-2">
               <p>{goal.goalText}</p>
             </div>
             {/* Create a link to this thought's page to view its comments using `<Link>` component */}
-            <Link
+            {/* <Link
               className="btn btn-primary btn-block btn-squared"
               to={`/goals/${goal._id}`}
             >
               Join the discussion on this thought.
-            </Link>
+            </Link> */}
           </div>
         ))}
     </div>
