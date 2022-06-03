@@ -1,24 +1,24 @@
-import React from 'react';
+import React from 'react'
 
 // Import the `useParams()` hook from React Router
-import { useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { useParams } from 'react-router-dom'
+import { useQuery } from '@apollo/client'
 
-import { QUERY_SINGLE_GOAL } from '../utils/queries';
+import { QUERY_GOAL } from '../utils/queries'
 
 const SingleGoal = () => {
   // Use `useParams()` to retrieve value of the route parameter `:profileId`
-  const { goalId } = useParams();
+  const { goalId } = useParams()
 
-  const { loading, data } = useQuery(QUERY_SINGLE_GOAL, {
+  const { loading, data } = useQuery(QUERY_GOAL, {
     // Pass the `thoughtId` URL parameter into query to retrieve this thought's data
     variables: { goalId: goalId },
-  });
+  })
 
-  const goal = data?.goal || {};
+  const goal = data?.goal || {}
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
   return (
     <div className="my-3">
@@ -42,7 +42,7 @@ const SingleGoal = () => {
         </blockquote>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SingleGoal;
+export default SingleGoal

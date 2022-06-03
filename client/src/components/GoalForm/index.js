@@ -1,58 +1,57 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-
-import { ADD_GOAL } from '../../utils/mutations';
-import { QUERY_GOALS } from '../../utils/queries';
+import React, { useState } from 'react'
+import { useMutation } from '@apollo/client'
+import { ADD_GOAL } from '../../utils/mutations'
+import { QUERY_GOALS } from '../../utils/queries'
 
 const GoalForm = () => {
   const [formState, setFormState] = useState({
     goalString: '',
     goalAuthor: '',
-  });
-  const [characterCount, setCharacterCount] = useState(0);
+  })
+  const [characterCount, setCharacterCount] = useState(0)
 
   const [addGoal, { error }] = useMutation(ADD_GOAL, {
     update(cache, { data: { addGoal } }) {
       try {
-        const { goals } = cache.readQuery({ query: QUERY_GOALS });
+        const { goals } = cache.readQuery({ query: QUERY_GOALS })
 
         cache.writeQuery({
           query: QUERY_GOALS,
           data: { goals: [addGoal, ...goals] },
-        });
+        })
       } catch (e) {
-        console.error(e);
+        console.error(e)
       }
     },
-  });
+  })
 
   const handleFormSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     try {
       const { data } = await addGoal({
         variables: { ...formState },
-      });
+      })
 
       setFormState({
         goalString: '',
         goalAuthor: '',
-      });
+      })
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
-  };
+  }
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value } = event.target
 
     if (name === 'goalString' && value.length <= 280) {
-      setFormState({ ...formState, [name]: value });
-      setCharacterCount(value.length);
+      setFormState({ ...formState, [name]: value })
+      setCharacterCount(value.length)
     } else if (name !== 'goalString') {
-      setFormState({ ...formState, [name]: value });
+      setFormState({ ...formState, [name]: value })
     }
-  };
+  }
 
   return (
     <div>
@@ -102,7 +101,7 @@ const GoalForm = () => {
         )}
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default GoalForm;
+export default GoalForm
