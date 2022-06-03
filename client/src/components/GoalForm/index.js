@@ -43,8 +43,7 @@ const GoalForm = () => {
         username: '',
       })
 
-      window.location.assign('/profile');
-
+      window.location.assign('/profile')
     } catch (err) {
       console.error(err)
     }
@@ -63,12 +62,13 @@ const GoalForm = () => {
 
   return (
     <div>
-      <h3 class='Goalquestion'>What's on your techy mind?</h3>
+      <h3 class="Goalquestion">What's on your techy mind?</h3>
 
       <p
         className={`m-0 ${
           characterCount === 280 || error ? 'text-danger' : ''
         }`}
+        style={{ color: 'grey' }}
       >
         Character Count: {characterCount}/280
         {error && <span className="ml-2">Something went wrong...</span>}
