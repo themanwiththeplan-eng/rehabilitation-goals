@@ -1,14 +1,16 @@
-import React from 'react';
-import { useQuery } from '@apollo/client';
+import React from 'react'
+import { useQuery } from '@apollo/client'
 
-import GoalList from '../components/GoalList';
-import GoalForm from '../components/GoalForm';
+import GoalList from '../components/GoalList'
+import GoalForm from '../components/GoalForm'
 
-import { QUERY_GOALS } from '../utils/queries';
+import { QUERY_ME } from '../utils/queries'
 
 const Home = () => {
-  const { loading, data } = useQuery(QUERY_GOALS);
-  const goals = data?.goals || [];
+  const { loading, data } = useQuery(QUERY_ME)
+  console.log(data)
+
+  const goals = data?.me?.goals || []
 
   return (
     <main>
@@ -23,15 +25,12 @@ const Home = () => {
           {loading ? (
             <div>Loading...</div>
           ) : (
-            <GoalList
-              thoughts={goals}
-              title="Some goals...."
-            />
+            <GoalList goals={goals} title="Some goals...." />
           )}
         </div>
       </div>
     </main>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

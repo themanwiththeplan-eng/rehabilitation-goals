@@ -5,38 +5,46 @@ import { QUERY_GOALS } from '../../utils/queries'
 
 const GoalForm = () => {
   const [formState, setFormState] = useState({
-    goalString: '',
-    goalAuthor: '',
+    goalText: '',
+    username: '',
   })
   const [characterCount, setCharacterCount] = useState(0)
+  const [addGoal, { error }] = useMutation(ADD_GOAL)
 
-  const [addGoal, { error }] = useMutation(ADD_GOAL, {
-    update(cache, { data: { addGoal } }) {
-      try {
-        const { goals } = cache.readQuery({ query: QUERY_GOALS })
+  // const [addGoal, { error }] = useMutation(ADD_GOAL, {
+  //   update(cache, { data: { addGoal } }) {
+  //     try {
+  //       const { goals } = cache.readQuery({ query: QUERY_GOALS })
 
-        cache.writeQuery({
-          query: QUERY_GOALS,
-          data: { goals: [addGoal, ...goals] },
-        })
-      } catch (e) {
-        console.error(e)
-      }
-    },
-  })
+  //       cache.writeQuery({
+  //         query: QUERY_GOALS,
+  //         data: { goals: [addGoal, ...goals] },
+  //       })
+  //     } catch (e) {
+  //       console.error(e)
+  //     }
+  //   },
+  // })
 
   const handleFormSubmit = async (event) => {
     event.preventDefault()
+    console.log(formState)
 
     try {
       const { data } = await addGoal({
-        variables: { ...formState },
+        variables: {
+          goalText: formState.goalText,
+          username: formState.username,
+        },
       })
 
       setFormState({
-        goalString: '',
-        goalAuthor: '',
+        goalText: '',
+        username: '',
       })
+
+      window.location.assign('/profile');
+
     } catch (err) {
       console.error(err)
     }
@@ -45,17 +53,17 @@ const GoalForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target
 
-    if (name === 'goalString' && value.length <= 280) {
+    if (name === 'goalText' && value.length <= 280) {
       setFormState({ ...formState, [name]: value })
       setCharacterCount(value.length)
-    } else if (name !== 'goalString') {
+    } else if (name !== 'goalText') {
       setFormState({ ...formState, [name]: value })
     }
   }
 
   return (
     <div>
-      <h3>What's on your techy mind?</h3>
+      <h3 class='Goalquestion'>What's on your techy mind?</h3>
 
       <p
         className={`m-0 ${
@@ -71,7 +79,7 @@ const GoalForm = () => {
       >
         <div className="col-12">
           <textarea
-            name="goalString"
+            name="goalText"
             placeholder="Here's a new goal..."
             value={formState.goalString}
             className="form-input w-100"
@@ -81,9 +89,9 @@ const GoalForm = () => {
         </div>
         <div className="col-12 col-lg-9">
           <input
-            name="goalAuthor"
+            name="username"
             placeholder="Add your name to get credit for the goal..."
-            value={formState.goalAuthor}
+            value={formState.username}
             className="form-input w-100"
             onChange={handleChange}
           />

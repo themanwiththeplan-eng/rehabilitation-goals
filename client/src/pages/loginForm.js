@@ -1,7 +1,9 @@
 // import '../index.css';
 
 import React, { useState } from 'react'
-import { useMutation } from '@apollo/react-hooks'
+// import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
+
 import { LOGIN_USER } from '../utils/mutations'
 import Auth from '../utils/auth'
 
@@ -53,16 +55,27 @@ const Login = (props) => {
       <form onSubmit={handleSubmit}>
         <Box mb={2}>
           <TextField
+            name="email"
+            onChange={handleChange}
             variant="outlined"
             label="email"
             fullWidth
             autoComplete="email"
+            value={formState.email}
           />
 
           {/* {...register("email", {required: "Required" })} */}
         </Box>
         <Box mb={2}>
-          <TextField variant="outlined" label="password" fullWidth />
+          <TextField
+            name="password"
+            onChange={handleChange}
+            type="password"
+            variant="outlined"
+            label="password"
+            fullWidth
+            value={formState.password}
+          />
           {/* {...register("password", {required: "Required" })} */}
         </Box>
         <Button type="submit" variant="contained" color="primary" fullWidth>

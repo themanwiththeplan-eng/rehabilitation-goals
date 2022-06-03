@@ -750,6 +750,9 @@ nav a:hover {
   text-align: right;
 }
 
+.Goalquestion {
+  color: black;
+}
 .text-primary {
   color: var(--primary);
 }
@@ -767,7 +770,7 @@ nav a:hover {
 }
 
 .text-light {
-  color: var(--light);
+  color: black;
 }
 
 .text-dark {

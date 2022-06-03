@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 export const QUERY_GOALS = gql`
   query goals($username: String) {
@@ -36,7 +36,7 @@ export const QUERY_USER = gql`
   }
 `
 export const QUERY_ME = gql`
-  {
+  query me {
     me {
       _id
       username
@@ -52,7 +52,7 @@ export const QUERY_ME = gql`
 `
 
 export const QUERY_ME_BASIC = gql`
-  {
+  query basic {
     me {
       _id
       username
