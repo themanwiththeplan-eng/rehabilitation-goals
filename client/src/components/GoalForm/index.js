@@ -43,7 +43,7 @@ const GoalForm = () => {
         username: '',
       })
 
-      window.location.assign('/profile')
+      window.location.assign('/')
     } catch (err) {
       console.error(err)
     }
