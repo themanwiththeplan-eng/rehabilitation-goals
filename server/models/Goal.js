@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose')
+const { Schema } = require('mongoose')
 const dateFormat = require('../utils/dateFormat')
 
 const goalSchema = new Schema(
@@ -26,6 +26,6 @@ const goalSchema = new Schema(
   }
 )
 
-const Goal = model('Goal', goalSchema)
+// const Goal = model('Goal', goalSchema)
 
-module.exports = Goal
+module.exports = goalSchema;
