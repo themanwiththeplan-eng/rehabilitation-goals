@@ -1,7 +1,7 @@
 const faker = require('faker')
 
 const db = require('../config/connection')
-const { Goal, User } = require('../models')
+// const { Goal, User } = require('../models')
 
 db.once('open', async () => {
   await Goal.deleteMany({})
