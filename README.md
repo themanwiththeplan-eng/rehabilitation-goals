@@ -31,7 +31,7 @@ Home Page
 <img width="1440" alt="home" src="https://user-images.githubusercontent.com/73785514/171916434-3c71da7d-1bb8-466a-897b-13c42bcfb800.png">
 
 - - - -
-Heroku-deployed app: Coming Soon
+Heroku-deployed app:(https://rehabilitation-goals-9.herokuapp.com/)
 
 GitHub repository: https://github.com/themanwiththeplan-eng/rehabilitation-goals
 
